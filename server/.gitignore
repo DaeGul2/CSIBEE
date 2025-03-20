@@ -1,0 +1,41 @@
+# 1️⃣ Python 관련 (컴파일된 캐시 파일)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 2️⃣ 환경 변수 파일 (API Key, DB URL 등 보안 파일)
+.env
+*.env
+config.py
+instance/
+
+# 3️⃣ Virtualenv (가상 환경)
+venv/
+env/
+.venv/
+.virtualenv/
+
+# 4️⃣ 데이터베이스 파일 (SQLite 등)
+*.db
+*.sqlite3
+migrations/
+
+# 5️⃣ Logs & Debug 파일
+logs/
+*.log
+*.out
+*.err
+
+# 6️⃣ VSCode, PyCharm 등의 IDE 관련 파일
+.vscode/
+.idea/
+*.swp
+
+# 7️⃣ Node.js 관련 (프론트엔드 포함 프로젝트일 경우)
+node_modules/
+package-lock.json
+yarn.lock
+
+# 8️⃣ 기타
+.DS_Store  # macOS에서 자동 생성되는 파일
