@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { 
-  Container, Button, Modal, Form, Image, Row, Col, Card, InputGroup, FormControl 
+import {
+  Container, Button, Modal, Form, Image, Row, Col, Card, InputGroup, FormControl
 } from "react-bootstrap";
 import api from "../services/api";
 import CommentsComponent from "../components/CommentsComponent";
@@ -107,6 +107,7 @@ function FoundItemsPage() {
   };
 
   // 습득물 등록
+  // 습득물 등록 함수 (handleRegisterSubmit)
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -126,12 +127,25 @@ function FoundItemsPage() {
       await api.post("/found_items/", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
+      // 등록 후 모달 닫기
       setShowRegisterModal(false);
+      // 업로드 폼 상태 초기화
+      setRegisterForm({
+        found_item_post_name: "",
+        found_item_name: "",
+        found_location: "",
+        found_time: "",
+        content: "",
+        status: false,
+      });
+      // 이미지 파일 상태 초기화
+      setImageFiles([]);
       fetchFoundItems();
     } catch (err) {
       console.error("❌ 습득물 등록 실패:", err);
     }
   };
+
 
   // 상세 조회 (조회수 증가 포함)
   const handleItemClick = async (item) => {
@@ -299,17 +313,42 @@ function FoundItemsPage() {
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleRegisterSubmit}>
-            {["found_item_post_name", "found_item_name", "found_location", "found_time"].map((field, idx) => (
-              <Form.Group key={idx} className="mb-3">
-                <Form.Label style={{ fontSize: "0.9em" }}>{field.replace("_", " ")}</Form.Label>
-                <Form.Control
-                  name={field}
-                  value={registerForm[field]}
-                  onChange={handleRegisterChange}
-                  style={{ fontSize: "0.8em" }}
-                />
-              </Form.Group>
-            ))}
+            <Form.Group className="mb-3">
+              <Form.Label style={{ fontSize: "0.9em" }}>게시글 제목</Form.Label>
+              <Form.Control
+                name="found_item_post_name"
+                value={registerForm.found_item_post_name}
+                onChange={handleRegisterChange}
+                style={{ fontSize: "0.8em" }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label style={{ fontSize: "0.9em" }}>습득물 이름</Form.Label>
+              <Form.Control
+                name="found_item_name"
+                value={registerForm.found_item_name}
+                onChange={handleRegisterChange}
+                style={{ fontSize: "0.8em" }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label style={{ fontSize: "0.9em" }}>습득 위치</Form.Label>
+              <Form.Control
+                name="found_location"
+                value={registerForm.found_location}
+                onChange={handleRegisterChange}
+                style={{ fontSize: "0.8em" }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label style={{ fontSize: "0.9em" }}>습득 시간</Form.Label>
+              <Form.Control
+                name="found_time"
+                value={registerForm.found_time}
+                onChange={handleRegisterChange}
+                style={{ fontSize: "0.8em" }}
+              />
+            </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label style={{ fontSize: "0.9em" }}>내용</Form.Label>
               <Form.Control
@@ -380,7 +419,7 @@ function FoundItemsPage() {
                 </div>
               )}
               {/* 작성자만 해결/삭제 가능 */}
-              {user && user.user_id === selectedItem.author_id && (
+              {user && (user.is_admin === true || user.user_id === selectedItem.author_id) && (
                 <>
                   {!selectedItem.status && (
                     <Button
@@ -400,6 +439,7 @@ function FoundItemsPage() {
                   </Button>
                 </>
               )}
+
               {/* 댓글 컴포넌트 연결 (category="found_item") */}
               <CommentsComponent
                 postId={selectedItem.found_item_post_id}

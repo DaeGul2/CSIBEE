@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { 
-  Container, Button, Modal, Form, Image, Row, Col, Card, InputGroup, FormControl 
+import {
+  Container, Button, Modal, Form, Image, Row, Col, Card, InputGroup, FormControl
 } from "react-bootstrap";
 import api from "../services/api";
 import CommentsComponent from "../components/CommentsComponent";
@@ -65,12 +65,12 @@ function LostItemsPage() {
   // 키워드(searchTerm) 포함해서 페이지네이션된 분실물 목록 조회
   const fetchLostItems = async () => {
     try {
-      const res = await api.get("/lost-items/", { 
-        params: { 
-          page: currentPage, 
-          limit: itemsPerPage, 
-          keyword: searchTerm 
-        } 
+      const res = await api.get("/lost-items/", {
+        params: {
+          page: currentPage,
+          limit: itemsPerPage,
+          keyword: searchTerm
+        }
       });
       setLostItems(res.data.lost_items);
       setTotalPages(res.data.total_pages);
@@ -105,6 +105,7 @@ function LostItemsPage() {
   };
 
   // 분실물 등록
+  // 분실물 등록 함수 (handleRegisterSubmit)
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -125,11 +126,23 @@ function LostItemsPage() {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setShowRegisterModal(false);
+      // 업로드 폼 상태 초기화
+      setRegisterForm({
+        lost_item_post_name: "",
+        lost_item_name: "",
+        lost_location: "",
+        lost_time: "",
+        content: "",
+        status: false,
+      });
+      // 이미지 파일 상태 초기화
+      setImageFiles([]);
       fetchLostItems();
     } catch (err) {
       console.error("❌ 분실물 등록 실패:", err);
     }
   };
+
 
   // 게시글 상세 조회 시 GET 호출 (조회수 증가 포함)
   const handleItemClick = async (item) => {
@@ -276,39 +289,64 @@ function LostItemsPage() {
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleRegisterSubmit}>
-            {["lost_item_post_name", "lost_item_name", "lost_location", "lost_time"].map((field, idx) => (
-              <Form.Group key={idx} className="mb-3">
-                <Form.Label style={{ fontSize: "0.9em" }}>{field.replace("_", " ")}</Form.Label>
-                <Form.Control 
-                  name={field} 
-                  value={registerForm[field]} 
-                  onChange={handleRegisterChange} 
-                  style={{ fontSize: "0.8em" }} 
-                />
-              </Form.Group>
-            ))}
+            <Form.Group className="mb-3">
+              <Form.Label style={{ fontSize: "0.9em" }}>게시글 제목</Form.Label>
+              <Form.Control
+                name="lost_item_post_name"
+                value={registerForm.lost_item_post_name}
+                onChange={handleRegisterChange}
+                style={{ fontSize: "0.8em" }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label style={{ fontSize: "0.9em" }}>분실물 이름</Form.Label>
+              <Form.Control
+                name="lost_item_name"
+                value={registerForm.lost_item_name}
+                onChange={handleRegisterChange}
+                style={{ fontSize: "0.8em" }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label style={{ fontSize: "0.9em" }}>분실 위치</Form.Label>
+              <Form.Control
+                name="lost_location"
+                value={registerForm.lost_location}
+                onChange={handleRegisterChange}
+                style={{ fontSize: "0.8em" }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label style={{ fontSize: "0.9em" }}>분실 시간</Form.Label>
+              <Form.Control
+                name="lost_time"
+                value={registerForm.lost_time}
+                onChange={handleRegisterChange}
+                style={{ fontSize: "0.8em" }}
+              />
+            </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label style={{ fontSize: "0.9em" }}>내용</Form.Label>
-              <Form.Control 
-                as="textarea" 
-                name="content" 
-                value={registerForm.content} 
-                onChange={handleRegisterChange} 
-                style={{ fontSize: "0.8em" }} 
+              <Form.Control
+                as="textarea"
+                name="content"
+                value={registerForm.content}
+                onChange={handleRegisterChange}
+                style={{ fontSize: "0.8em" }}
               />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label style={{ fontSize: "0.9em" }}>🖼️ 이미지 업로드</Form.Label>
-              <Form.Control 
-                type="file" 
-                multiple 
-                onChange={handleImageChange} 
-                style={{ fontSize: "0.8em" }} 
+              <Form.Control
+                type="file"
+                multiple
+                onChange={handleImageChange}
+                style={{ fontSize: "0.8em" }}
               />
             </Form.Group>
-            <Button 
-              variant="primary" 
-              type="submit" 
+            <Button
+              variant="primary"
+              type="submit"
               style={{ backgroundColor: "#1DA1F2", borderColor: "#1DA1F2", fontSize: "0.8em" }}
             >
               등록
@@ -316,6 +354,7 @@ function LostItemsPage() {
           </Form>
         </Modal.Body>
       </Modal>
+
 
       {/* 분실물 상세 Modal */}
       <Modal show={showDetailModal} onHide={() => setShowDetailModal(false)} size="lg">
@@ -356,26 +395,27 @@ function LostItemsPage() {
                   ))}
                 </div>
               )}
-              {user && user.user_id === selectedItem.author_id && (
+              {user && (user.is_admin === true || user.user_id === selectedItem.author_id) && (
                 <>
                   {!selectedItem.status && (
-                    <Button 
-                      variant="success" 
-                      onClick={() => handleMarkAsFound(selectedItem.lost_item_post_id)} 
+                    <Button
+                      variant="success"
+                      onClick={() => handleMarkAsFound(selectedItem.lost_item_post_id)}
                       style={{ marginBottom: "15px", fontSize: "0.8em", marginRight: "5px" }}
                     >
                       찾기 완료
                     </Button>
                   )}
-                  <Button 
-                    variant="danger" 
-                    onClick={() => handleDeletePost(selectedItem.lost_item_post_id)} 
+                  <Button
+                    variant="danger"
+                    onClick={() => handleDeletePost(selectedItem.lost_item_post_id)}
                     style={{ marginBottom: "15px", fontSize: "0.8em" }}
                   >
                     게시글 삭제
                   </Button>
                 </>
               )}
+
               <CommentsComponent
                 postId={selectedItem.lost_item_post_id}
                 category="lost_item"

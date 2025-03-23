@@ -29,7 +29,7 @@ class LostItemPost(db.Model):
     lost_time = db.Column(db.String(30), nullable=False)
     content = db.Column(db.Text, nullable=False)
     image_urls = db.Column(db.Text)
-    status = db.Column(db.Boolean, default=True)
+    status = db.Column(db.Boolean, default=False)
     views = db.Column(db.Integer, default=0)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -45,7 +45,7 @@ class FoundItemPost(db.Model):
     content = db.Column(db.Text, nullable=False)
     image_urls = db.Column(db.Text)
     resolved = db.Column(db.Boolean, default=False)
-    status = db.Column(db.Boolean, default=True)
+    status = db.Column(db.Boolean, default=False)
     views = db.Column(db.Integer, default=0)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
