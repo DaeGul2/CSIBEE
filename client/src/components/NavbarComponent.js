@@ -20,7 +20,7 @@ function NavbarComponent({ user, setUser }) {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand as={Link} to="/">Lost &amp; Found</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">CSIBEE</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           {user && (

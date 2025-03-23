@@ -56,7 +56,7 @@ class ShareItemPost(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     content = db.Column(db.Text, nullable=False)
     image_urls = db.Column(db.Text)
-    status = db.Column(db.Boolean, default=True)
+    status = db.Column(db.Boolean, default=False) # 나눔 완료인지 아닌지 
     views = db.Column(db.Integer, default=0)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
