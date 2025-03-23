@@ -14,6 +14,7 @@ class User(db.Model):
     student_num = db.Column(db.Integer, nullable=False)
     phone_number = db.Column(db.String(20), nullable=False, unique=True)
     is_admin = db.Column(db.Boolean, default=False)
+    is_confirmed = db.Column(db.Boolean, default=False)  # 신규 필드 (관리자 승인 전 false)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 

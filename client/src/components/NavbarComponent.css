@@ -1,0 +1,47 @@
+/* Navbar 전체 스타일 */
+.my-navbar {
+    font-size: 0.9em;
+  }
+  
+  /* 브랜드 텍스트 */
+  .my-brand {
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  
+  /* 일반 Nav 링크 스타일 */
+  .nav-item {
+    margin: 0 8px;
+    font-size: 0.95em;
+    color: #333 !important;
+  }
+  
+  /* 유저 정보 텍스트 */
+  .nav-user {
+    font-size: 0.85em;
+    color: #555;
+  }
+  
+  /* 로그아웃 버튼 */
+  .nav-logout {
+    font-size: 0.85em;
+    color: #888 !important;
+  }
+  
+  /* 반응형 예시: 화면이 매우 좁아지면 폰트 더 줄이기 */
+  @media (max-width: 576px) {
+    .my-navbar {
+      font-size: 0.85em;
+    }
+    .my-brand {
+      font-size: 1em;
+    }
+    .nav-item {
+      font-size: 0.9em;
+    }
+    .nav-user,
+    .nav-logout {
+      font-size: 0.8em;
+    }
+  }
+  

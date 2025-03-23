@@ -9,18 +9,20 @@ function LoginPage({ setUser }) {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    
     e.preventDefault();
     try {
-      // ✅ 로그인 API 호출 (user_id 기반)
-      const res = await api.post('/auth/login', { user_id: userId, password }, { withCredentials: true });
-
-      // ✅ 세션 유지: 로그인 성공 시 사용자 정보 저장
+      const res = await api.post('/auth/login', { user_id: userId, password });
+      // 로그인 성공 시 세션 스토리지에 저장
       sessionStorage.setItem('user', JSON.stringify(res.data));
-      setUser(res.data);  // App.js의 user 상태 변경
+      setUser(res.data);
       navigate('/lost-items');
     } catch (err) {
       console.error('로그인 실패:', err);
+      if (err.response && err.response.status === 403) {
+        alert('관리자의 승인을 받기 전입니다.');
+      } else {
+        alert('아이디 또는 비밀번호가 올바르지 않습니다.');
+      }
     }
   };
 
