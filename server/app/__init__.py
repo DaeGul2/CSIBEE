@@ -1,3 +1,4 @@
+# server.py (혹은 __init__.py)
 from flask import Flask, send_from_directory
 from flask_cors import CORS
 from .database import db
@@ -18,14 +19,18 @@ def create_app():
     Session(app)
 
     # ✅ 업로드 폴더 경로 설정
-    UPLOAD_FOLDER = os.path.join(os.getcwd(), "app", "static", "uploads")  # ✅ Flask 앱 내부 static/uploads 폴더 사용
+    UPLOAD_FOLDER = os.path.join(os.getcwd(), "app", "static", "uploads")
     if not os.path.exists(UPLOAD_FOLDER):
         os.makedirs(UPLOAD_FOLDER)
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+    # 🔹 여기서 모델 임포트 (핵심)
+    #    이렇게 해야 db.create_all()이 User, LostItemPost 등 인식
+    from app.models import User, LostItemPost, FoundItemPost, ShareItemPost, Comment
+
     db.init_app(app)
     with app.app_context():
-        db.create_all()
+        db.create_all()  # 모델을 인식한 상태에서 테이블 생성
 
     # ✅ Blueprint 등록
     from app.routes.user_routes import user_bp
@@ -44,6 +49,6 @@ def create_app():
 
     @app.route('/static/uploads/<path:filename>')
     def serve_uploaded_file(filename):
-        return send_from_directory(UPLOAD_FOLDER, filename)  # ✅ 정적 파일 제공
+        return send_from_directory(UPLOAD_FOLDER, filename)
 
     return app

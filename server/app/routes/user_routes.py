@@ -41,6 +41,7 @@ def create_user():
     data = request.json
     if not data.get('user_id'):
         return jsonify({'error': 'user_id is required.'}), 400
+    
 
     user = User(
         user_id=data.get('user_id'),
@@ -59,6 +60,7 @@ def create_user():
         db.session.commit()
     except Exception as e:
         db.session.rollback()
+        print(e)
         return jsonify({'error': str(e)}), 500
 
     return jsonify({'message': 'User created', 'user_id': user.user_id}), 201
