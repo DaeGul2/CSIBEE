@@ -39,3 +39,4 @@ yarn.lock
 
 # 8️⃣ 기타
 .DS_Store  # macOS에서 자동 생성되는 파일
+app/static/uploads/
