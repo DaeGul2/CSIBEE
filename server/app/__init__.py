@@ -11,7 +11,7 @@ def create_app():
     app.config.from_object(Config)
 
     # ✅ CORS 설정
-    CORS(app, resources={r"/*": {"origins": ["http://localhost:3001", "http://localhost:3000"], "supports_credentials": True}})
+    CORS(app, resources={r"/*": {"origins": ["http://52.79.158.184:3000","http://localhost:3001", "http://localhost:3000"], "supports_credentials": True}})
 
     # ✅ 세션 설정
     app.config['SESSION_TYPE'] = 'filesystem'
