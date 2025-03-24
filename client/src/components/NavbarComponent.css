@@ -3,45 +3,28 @@
   top: 0;
   left: 0;
   right: 0;
-  background-color: #f8f9fa; /* 배경색 */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 살짝 그림자 */
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   z-index: 9999;
-  font-size: 0.9em;
-  /* 높이를 어느정도 가정(예: 60px). 내용에 맞춰 조정 가능 */
-  height: 60px; 
+  font-size: 0.75em; /* 🔽 글자 작게 */
+  padding: 5px 1rem;
 }
 
 .navbar-content {
   display: flex;
-  align-items: center;
-  height: 100%; 
-  padding: 0 1rem; /* 좌우 여백 */
+  flex-direction: column; /* 🔽 세로 정렬 */
+  align-items: flex-start;
 }
 
 .brand {
   font-weight: bold;
-  margin-right: 1rem;
-  cursor: pointer;
+  font-size: 2em;
+  margin-bottom: 4px;
 }
 
 .nav-links {
   display: flex;
-  gap: 1rem;
-  margin-right: auto; /* 남은 공간 밀어쓰기 */
-}
-
-.nav-user-area {
-  display: flex;
-  align-items: center;
+  flex-wrap: wrap; /* 🔽 모바일에서 줄바꿈 */
   gap: 0.5rem;
-}
-
-.nav-user-text {
-  color: #555;
-  margin-right: 0.5rem;
-}
-
-.nav-item {
-  color: #333;
-  text-decoration: none;
+  font-size: 0.9em;
 }
