@@ -26,5 +26,5 @@
   display: flex;
   flex-wrap: wrap; /* 🔽 모바일에서 줄바꿈 */
   gap: 0.5rem;
-  font-size: 0.95em;
+  font-size: 1em;
 }
