@@ -25,6 +25,6 @@
 .nav-links {
   display: flex;
   flex-wrap: wrap; /* 🔽 모바일에서 줄바꿈 */
-  gap: 0.5rem;
+  gap: 0.8rem;
   font-size: 1.1em;
 }
