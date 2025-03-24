@@ -197,7 +197,7 @@ function FoundItemsPage() {
 
   return (
     <Container style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      <h2 style={{ fontSize: "22px", fontWeight: "bold", marginBottom: "15px" }}>📌 습득물</h2>
+      <h2 style={{ fontSize: "22px", fontWeight: "bold", marginBottom: "15px" }}>📌 분실물 찾아가세요</h2>
 
       {/* 키워드 검색 */}
       <InputGroup className="mb-3">

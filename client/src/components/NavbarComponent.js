@@ -29,18 +29,18 @@ function NavbarComponent({ user, setUser }) {
         {/* 로그인 유저일 때만 메뉴 링크 표시 */}
         {user && (
           <div className="nav-links">
-            <Nav.Link as={Link} to="/lost-items" className="nav-item">
-              분실물
-            </Nav.Link>
-            <Nav.Link as={Link} to="/found-items" className="nav-item">
-              습득물
-            </Nav.Link>
-            <Nav.Link as={Link} to="/share" className="nav-item">
-              나눔
-            </Nav.Link>
             <Nav.Link as={Link} to="/notices" className="nav-item">
               공지사항
             </Nav.Link>
+            <Nav.Link as={Link} to="/lost-items" className="nav-item">
+              분실물 찾아요
+            </Nav.Link>
+            <Nav.Link as={Link} to="/found-items" className="nav-item">
+              분실물 찾아가세요
+            </Nav.Link>
+            <Nav.Link as={Link} to="/share" className="nav-item">
+              나눔
+            </Nav.Link>            
             {user.is_admin && (
               <Nav.Link as={Link} to="/admin" className="nav-item">
                 관리자
@@ -53,9 +53,7 @@ function NavbarComponent({ user, setUser }) {
         <div className="nav-user-area">
           {user ? (
             <>
-              <span className="nav-user-text">
-                안녕하세요, {user.user_name}님
-              </span>
+              
               <Nav.Link onClick={handleLogout} className="nav-logout">
                 로그아웃
               </Nav.Link>

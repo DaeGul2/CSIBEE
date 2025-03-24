@@ -15,7 +15,7 @@ function LoginPage({ setUser }) {
       // 로그인 성공 시 세션 스토리지에 저장
       sessionStorage.setItem('user', JSON.stringify(res.data));
       setUser(res.data);
-      navigate('/lost-items');
+      navigate('/notice');
     } catch (err) {
       console.error('로그인 실패:', err);
       if (err.response && err.response.status === 403) {
