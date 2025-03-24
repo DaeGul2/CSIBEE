@@ -61,7 +61,7 @@ def get_found_items():
     limit = request.args.get('limit', 10, type=int)
     keyword = request.args.get('keyword', '', type=str)
 
-    query = FoundItemPost.query
+    query = FoundItemPost.query.filter_by(status=False)
 
     if keyword:
         query = query.filter(or_(
