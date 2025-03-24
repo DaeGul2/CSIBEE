@@ -66,6 +66,7 @@ class CommentCategoryEnum(enum.Enum):  # ✅ Python의 Enum을 사용
     LOST_ITEM = "lost_item"
     FOUND_ITEM = "found_item"
     SHARE_ITEM = "share_item"
+    NOTICE = "notice"  # 새로 추가
 
 class Comment(db.Model):
     comment_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -75,3 +76,15 @@ class Comment(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     content = db.Column(db.Text, nullable=False)
     parent_comment_id = db.Column(db.Integer, db.ForeignKey('comment.comment_id'), nullable=True)  # 🔹 변경됨
+
+
+class NoticePost(db.Model):
+    notice_post_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    notice_post_name = db.Column(db.String(100), nullable=False)
+    author_id = db.Column(db.String(50), db.ForeignKey('user.user_id'), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    image_urls = db.Column(db.Text)  # 선택사항, 필요 시 이미지 업로드
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    views = db.Column(db.Integer, default=0)
+

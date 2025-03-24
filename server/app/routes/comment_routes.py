@@ -4,17 +4,26 @@ from app.database import db
 
 comment_bp = Blueprint('comments', __name__, url_prefix='/comments')
 
+# comment_routes.py (일부)
 @comment_bp.route('/', methods=['GET'])
 def get_comments():
     comments = Comment.query.all()
-    return jsonify([{
-        'comment_id': comment.comment_id,
-        'category': comment.category.value,  # enum의 value 사용
-        'author_id': comment.author_id,
-        'post_id': comment.post_id,
-        'content': comment.content,
-        'parent_comment_id': comment.parent_comment_id
-    } for comment in comments]), 200
+    results = []
+    for comment in comments:
+        # category가 enum이면 .value, 아니면 문자열
+        category_str = comment.category.value if hasattr(comment.category, 'value') else comment.category
+        results.append({
+            'comment_id': comment.comment_id,
+            'category': category_str,
+            'author_id': comment.author_id,
+            'post_id': comment.post_id,
+            'content': comment.content,
+            'parent_comment_id': comment.parent_comment_id,
+            # ➡ 추가: created_at 필드
+            'created_at': comment.created_at.isoformat() if comment.created_at else None
+        })
+    return jsonify(results), 200
+
 
 @comment_bp.route('/<int:comment_id>', methods=['GET'])
 def get_comment(comment_id):

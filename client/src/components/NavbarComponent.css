@@ -1,47 +1,47 @@
-/* Navbar 전체 스타일 */
 .my-navbar {
-    font-size: 0.9em;
-  }
-  
-  /* 브랜드 텍스트 */
-  .my-brand {
-    font-weight: bold;
-    font-size: 1.1em;
-  }
-  
-  /* 일반 Nav 링크 스타일 */
-  .nav-item {
-    margin: 0 8px;
-    font-size: 0.95em;
-    color: #333 !important;
-  }
-  
-  /* 유저 정보 텍스트 */
-  .nav-user {
-    font-size: 0.85em;
-    color: #555;
-  }
-  
-  /* 로그아웃 버튼 */
-  .nav-logout {
-    font-size: 0.85em;
-    color: #888 !important;
-  }
-  
-  /* 반응형 예시: 화면이 매우 좁아지면 폰트 더 줄이기 */
-  @media (max-width: 576px) {
-    .my-navbar {
-      font-size: 0.85em;
-    }
-    .my-brand {
-      font-size: 1em;
-    }
-    .nav-item {
-      font-size: 0.9em;
-    }
-    .nav-user,
-    .nav-logout {
-      font-size: 0.8em;
-    }
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #f8f9fa; /* 배경색 */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 살짝 그림자 */
+  z-index: 9999;
+  font-size: 0.9em;
+  /* 높이를 어느정도 가정(예: 60px). 내용에 맞춰 조정 가능 */
+  height: 60px; 
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  height: 100%; 
+  padding: 0 1rem; /* 좌우 여백 */
+}
+
+.brand {
+  font-weight: bold;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  margin-right: auto; /* 남은 공간 밀어쓰기 */
+}
+
+.nav-user-area {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-user-text {
+  color: #555;
+  margin-right: 0.5rem;
+}
+
+.nav-item {
+  color: #333;
+  text-decoration: none;
+}

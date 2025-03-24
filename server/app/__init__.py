@@ -39,6 +39,7 @@ def create_app():
     from app.routes.found_item_routes import found_item_bp
     from app.routes.share_item_routes import share_item_bp
     from app.routes.comment_routes import comment_bp
+    from app.routes.notice_routes import notice_bp  # 새로 추가
 
     app.register_blueprint(user_bp)
     app.register_blueprint(auth_bp)
@@ -46,6 +47,7 @@ def create_app():
     app.register_blueprint(found_item_bp)
     app.register_blueprint(share_item_bp)
     app.register_blueprint(comment_bp)
+    app.register_blueprint(notice_bp)  # 공지사항 등록
 
     @app.route('/static/uploads/<path:filename>')
     def serve_uploaded_file(filename):

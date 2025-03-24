@@ -1,8 +1,8 @@
 import React from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../services/api';
-import './NavbarComponent.css'; // 아래 CSS 예시를 임포트
+import './NavbarComponent.css';
 
 function NavbarComponent({ user, setUser }) {
   const navigate = useNavigate();
@@ -19,61 +19,60 @@ function NavbarComponent({ user, setUser }) {
   };
 
   return (
-    <Navbar bg="light" expand="lg" className="my-navbar">
-      <Container>
-        {/* 좌측 상단 브랜드 */}
-        <Navbar.Brand as={Link} to="/" className="my-brand">
+    <div className="my-navbar">
+      <div className="navbar-content">
+        {/* 로고/브랜드 */}
+        <div className="brand" onClick={() => navigate('/')}>
           CSIBEE
-        </Navbar.Brand>
+        </div>
 
-        {/* 모바일 토글 버튼 (햄버거 아이콘) */}
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-
-        {/* 펼쳐지는 메뉴 */}
-        <Navbar.Collapse id="basic-navbar-nav">
-          {user && (
-            <Nav className="me-auto">
-              <Nav.Link as={Link} to="/lost-items" className="nav-item">
-                분실물
+        {/* 로그인 유저일 때만 메뉴 링크 표시 */}
+        {user && (
+          <div className="nav-links">
+            <Nav.Link as={Link} to="/lost-items" className="nav-item">
+              분실물
+            </Nav.Link>
+            <Nav.Link as={Link} to="/found-items" className="nav-item">
+              습득물
+            </Nav.Link>
+            <Nav.Link as={Link} to="/share" className="nav-item">
+              나눔
+            </Nav.Link>
+            <Nav.Link as={Link} to="/notices" className="nav-item">
+              공지사항
+            </Nav.Link>
+            {user.is_admin && (
+              <Nav.Link as={Link} to="/admin" className="nav-item">
+                관리자
               </Nav.Link>
-              <Nav.Link as={Link} to="/found-items" className="nav-item">
-                습득물
-              </Nav.Link>
-              <Nav.Link as={Link} to="/share" className="nav-item">
-                나눔
-              </Nav.Link>
-              {user.is_admin && (
-                <Nav.Link as={Link} to="/admin" className="nav-item">
-                  관리자
-                </Nav.Link>
-              )}
-            </Nav>
-          )}
-
-          <Nav className="ms-auto">
-            {user ? (
-              <>
-                <Navbar.Text className="nav-user me-2">
-                  안녕하세요, {user.user_name}님
-                </Navbar.Text>
-                <Nav.Link onClick={handleLogout} className="nav-logout">
-                  로그아웃
-                </Nav.Link>
-              </>
-            ) : (
-              <>
-                <Nav.Link as={Link} to="/login" className="nav-item">
-                  로그인
-                </Nav.Link>
-                <Nav.Link as={Link} to="/register" className="nav-item">
-                  회원가입
-                </Nav.Link>
-              </>
             )}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+          </div>
+        )}
+
+        {/* 우측 사용자 영역 */}
+        <div className="nav-user-area">
+          {user ? (
+            <>
+              <span className="nav-user-text">
+                안녕하세요, {user.user_name}님
+              </span>
+              <Nav.Link onClick={handleLogout} className="nav-logout">
+                로그아웃
+              </Nav.Link>
+            </>
+          ) : (
+            <>
+              <Nav.Link as={Link} to="/login" className="nav-item">
+                로그인
+              </Nav.Link>
+              <Nav.Link as={Link} to="/register" className="nav-item">
+                회원가입
+              </Nav.Link>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 
