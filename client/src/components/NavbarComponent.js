@@ -37,10 +37,28 @@ function NavbarComponent({ user, setUser }) {
           {user.is_admin && (
             <Nav.Link as={Link} to="/admin" className="nav-item">관리자</Nav.Link>
           )}
-          <Nav.Link onClick={handleLogout} className="nav-item">로그아웃</Nav.Link>
+          
         </div>
       </div>
     )}
+    {/* 우측 사용자 영역 */}
+    <div className="nav-user-area">
+          {user ? (
+            <>
+              
+              <Nav.Link onClick={handleLogout} className="nav-logout">
+                로그아웃
+              </Nav.Link>
+            </>
+          ) : (
+            <>
+              
+              <Nav.Link as={Link} to="/register" className="nav-item">
+                회원가입
+              </Nav.Link>
+            </>
+          )}
+        </div>
   </div>
 </div>
 
