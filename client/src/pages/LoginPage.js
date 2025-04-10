@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
+import './LoginPage.css'; // 추가: 스타일 분리 (선택사항)
 
 function LoginPage({ setUser }) {
   const [userId, setUserId] = useState('');
@@ -12,7 +13,6 @@ function LoginPage({ setUser }) {
     e.preventDefault();
     try {
       const res = await api.post('/auth/login', { user_id: userId, password });
-      // 로그인 성공 시 세션 스토리지에 저장
       sessionStorage.setItem('user', JSON.stringify(res.data));
       setUser(res.data);
       navigate('/notice');
@@ -27,30 +27,39 @@ function LoginPage({ setUser }) {
   };
 
   return (
-    <Container>
-      <Row className="justify-content-md-center mt-5">
-        <Col md={6}>
-          <h2>로그인</h2>
+    <Container
+      className="d-flex flex-column justify-content-start align-items-center login-container"
+    >
+      <Row className="w-100 justify-content-center" style={{ marginTop: '1rem' }}>
+        <Col xs={12} sm={10} md={6} className="text-center">
+          <img
+            src="/images/login.jpg"
+            alt="로그인 이미지"
+            className="login-image"
+          />
+          <h2 className="mb-4">로그인</h2>
           <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="formUserId" className="mb-3">
+            <Form.Group controlId="formUserId" className="mb-3 text-start">
               <Form.Label>아이디</Form.Label>
-              <Form.Control 
-                type="text" 
-                placeholder="아이디 입력" 
-                value={userId} 
-                onChange={(e) => setUserId(e.target.value)} 
+              <Form.Control
+                type="text"
+                placeholder="아이디 입력"
+                value={userId}
+                onChange={(e) => setUserId(e.target.value)}
               />
             </Form.Group>
-            <Form.Group controlId="formPassword" className="mb-3">
+            <Form.Group controlId="formPassword" className="mb-4 text-start">
               <Form.Label>비밀번호</Form.Label>
-              <Form.Control 
-                type="password" 
-                placeholder="비밀번호 입력" 
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)} 
+              <Form.Control
+                type="password"
+                placeholder="비밀번호 입력"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
-            <Button variant="primary" type="submit">로그인</Button>
+            <Button variant="primary" type="submit" className="w-100">
+              로그인
+            </Button>
           </Form>
         </Col>
       </Row>
