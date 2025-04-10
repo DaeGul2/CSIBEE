@@ -12,6 +12,7 @@ import {
 import api from "../services/api";
 import CommentsComponent from "../components/CommentsComponent";
 
+
 // 목록에서만 상대시간 표기 (예: "3일 전", "2시간 전")
 function formatRelativeTime(dateString) {
   if (!dateString) return "";
@@ -171,22 +172,51 @@ function NoticeBoardPage() {
 
   return (
     <Container className="mt-4">
-      <h2>공지사항</h2>
-      <InputGroup className="mb-3" style={{ maxWidth: "400px" }}>
-        <FormControl
-          placeholder="키워드 검색"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <Button variant="outline-secondary" onClick={handleSearch}>
-          검색
-        </Button>
-      </InputGroup>
-      {user && user.is_admin && (
-        <Button variant="primary" onClick={() => setShowRegisterModal(true)}>
-          공지사항 등록
-        </Button>
-      )}
+      <div
+        style={{
+          position: 'relative',
+          overflow: 'hidden',
+          padding: '2rem',
+          borderRadius: '0.5rem',
+          backgroundColor: 'rgba(255,255,255,0.9)', // 내용 가독성 확보
+        }}
+      >
+        {/* 흐릿한 배경 이미지 */}
+        <div
+          style={{
+            backgroundImage: 'url("/images/notice_background.jpg")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            filter: 'blur(4px)',
+            opacity: 0.7,
+            zIndex: -1,
+          }}
+        ></div>
+
+        {/* 실제 내용 */}
+        <h2>공지사항</h2>
+        <InputGroup className="mb-3" style={{ maxWidth: "400px" }}>
+          <FormControl
+            placeholder="키워드 검색"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <Button variant="outline-secondary" onClick={handleSearch}>
+            검색
+          </Button>
+        </InputGroup>
+        {user && user.is_admin && (
+          <Button variant="primary" onClick={() => setShowRegisterModal(true)}>
+            공지사항 등록
+          </Button>
+        )}
+      </div>
+
 
       {/* 테이블: 번호, 제목, 작성자, 작성일(상대시간) */}
       <Table striped bordered hover className="mt-3">

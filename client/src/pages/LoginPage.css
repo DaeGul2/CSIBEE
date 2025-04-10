@@ -1,14 +1,13 @@
 .login-container {
-    min-height: 100vh;
-    padding: 2rem 1rem;
-  }
-  
-  .login-image {
-    width: 80%;
-    max-width: 240px;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  }
-  
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+.login-image {
+  width: 80%;
+  max-width: 240px;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
