@@ -19,3 +19,6 @@ body {
 .modal-backdrop {
   z-index: 1999 !important;
 }
+body {
+  padding-top: 80px; /* 필요에 따라 조정: navbar 높이에 맞게 */
+}
