@@ -11,7 +11,7 @@ def create_app():
     app.config.from_object(Config)
 
     # ✅ CORS 설정
-    CORS(app, resources={r"/*": {"origins": ["http://52.79.158.184:3000","http://localhost:3001", "http://localhost:3000"], "supports_credentials": True}})
+    CORS(app, resources={r"/*": {"origins": ["http://cisabee.com","http://52.79.158.184:3000","http://localhost:3001", "http://localhost:3000"], "supports_credentials": True}})
 
     # ✅ 세션 설정
     app.config['SESSION_TYPE'] = 'filesystem'
@@ -41,13 +41,13 @@ def create_app():
     from app.routes.comment_routes import comment_bp
     from app.routes.notice_routes import notice_bp  # 새로 추가
 
-    app.register_blueprint(user_bp)
-    app.register_blueprint(auth_bp)
-    app.register_blueprint(lost_item_bp)
-    app.register_blueprint(found_item_bp)
-    app.register_blueprint(share_item_bp)
-    app.register_blueprint(comment_bp)
-    app.register_blueprint(notice_bp)  # 공지사항 등록
+    app.register_blueprint(user_bp, url_prefix="/api/users")
+    app.register_blueprint(auth_bp, url_prefix="/api/auth")
+    app.register_blueprint(lost_item_bp, url_prefix="/api/lost-items")
+    app.register_blueprint(found_item_bp, url_prefix="/api/found_items")
+    app.register_blueprint(share_item_bp, url_prefix="/api/share_items")
+    app.register_blueprint(comment_bp, url_prefix="/api/comments")
+    app.register_blueprint(notice_bp, url_prefix="/api/notices")
 
     @app.route('/static/uploads/<path:filename>')
     def serve_uploaded_file(filename):

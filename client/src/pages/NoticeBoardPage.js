@@ -328,7 +328,7 @@ function NoticeBoardPage() {
                   {selectedNotice.image_urls.map((url, index) => (
                     <Image
                       key={index}
-                      src={`${process.env.REACT_APP_API_URL}${url}`}
+                      src={`${process.env.REACT_APP_IMAGE_URL}${url}`}
                       fluid
                       className="mb-2"
                     />

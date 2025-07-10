@@ -6,7 +6,7 @@ from sqlalchemy import or_
 from app.models import LostItemPost, User
 from app.database import db
 
-lost_item_bp = Blueprint("lost_items", __name__, url_prefix="/lost-items")
+lost_item_bp = Blueprint("lost_items", __name__)
 
 # 이미지 업로드 설정
 UPLOAD_FOLDER = os.path.join("app", "static", "uploads")

@@ -8,7 +8,7 @@ from sqlalchemy import or_
 from app.models import NoticePost, User
 from app.database import db
 
-notice_bp = Blueprint("notices", __name__, url_prefix="/notices")
+notice_bp = Blueprint("notices", __name__)
 
 UPLOAD_FOLDER = os.path.join("app", "static", "uploads")
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}

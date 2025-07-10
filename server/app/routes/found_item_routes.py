@@ -6,7 +6,7 @@ from sqlalchemy import or_
 from app.models import FoundItemPost, User
 from app.database import db
 
-found_item_bp = Blueprint('found_items', __name__, url_prefix='/found_items')
+found_item_bp = Blueprint('found_items', __name__)
 
 UPLOAD_FOLDER = os.path.join("app", "static", "uploads")
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}

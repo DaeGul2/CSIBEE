@@ -37,7 +37,7 @@ function NavbarComponent({ user, setUser }) {
         
         {/* 로고 + 이미지 */}
         <div className="brand" onClick={() => navigate('/')} style={{ display: 'flex', alignItems: 'center' }}>
-          <span style={{ marginRight: '10px' }}>CSIBEE</span>
+          <span style={{ marginRight: '10px' }}>CSIABEE</span>
           {currentIcon && (
             <img src={currentIcon} alt="page-icon" style={{ height: '24px' }} />
           )}

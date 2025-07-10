@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from app.models import Comment, CommentCategoryEnum
 from app.database import db
 
-comment_bp = Blueprint('comments', __name__, url_prefix='/comments')
+comment_bp = Blueprint('comments', __name__)
 
 # comment_routes.py (일부)
 @comment_bp.route('/', methods=['GET'])

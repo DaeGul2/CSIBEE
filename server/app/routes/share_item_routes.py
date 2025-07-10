@@ -6,7 +6,7 @@ from sqlalchemy import or_
 from app.models import ShareItemPost, User
 from app.database import db
 
-share_item_bp = Blueprint('share_items', __name__, url_prefix='/share_items')
+share_item_bp = Blueprint('share_items', __name__)
 
 UPLOAD_FOLDER = os.path.join("app", "static", "uploads")
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}

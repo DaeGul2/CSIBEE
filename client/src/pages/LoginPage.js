@@ -27,16 +27,29 @@ function LoginPage({ setUser }) {
   };
 
   return (
-    <Container
-      className="d-flex flex-column justify-content-start align-items-center login-container"
-    >
+ <Container className="d-flex flex-column justify-content-start align-items-center login-container">
       <Row className="w-100 justify-content-center" style={{ marginTop: '1rem' }}>
-        <Col xs={12} sm={10} md={6} className="text-center">
+        <Col
+          xs={12}
+          sm={10}
+          md={6}
+          className="text-center"
+          style={{ height: '250px', marginBottom: '1rem' }} // 이미지 영역 높이
+        >
           <img
-            src="/images/login.jpg"
+            src="/images/login2.png"
             alt="로그인 이미지"
-            className="login-image"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'fill',
+              borderRadius: '10px',
+            }}
           />
+        </Col>
+      </Row>
+      <Row className="w-100 justify-content-center">
+        <Col xs={12} sm={10} md={6} className="text-center">
           <h2 className="mb-4">로그인</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formUserId" className="mb-3 text-start">

@@ -244,7 +244,7 @@ function LostItemsPage() {
               {item.image_urls && item.image_urls.length > 0 && (
                 <Card.Img
                   variant="top"
-                  src={`${process.env.REACT_APP_API_URL}${item.image_urls[0]}`}
+                  src={`${process.env.REACT_APP_IMAGE_URL}${item.image_urls[0]}`}
                   style={{ height: "150px", objectFit: "cover", cursor: "pointer" }}
                   onClick={() => handleItemClick(item)}
                 />
@@ -388,7 +388,7 @@ function LostItemsPage() {
                   {selectedItem.image_urls.map((url, index) => (
                     <Image
                       key={index}
-                      src={`${process.env.REACT_APP_API_URL}${url}`}
+                      src={`${process.env.REACT_APP_IMAGE_URL}${url}`}
                       fluid
                       style={{ width: "100%", marginBottom: "10px", borderRadius: "10px" }}
                     />
